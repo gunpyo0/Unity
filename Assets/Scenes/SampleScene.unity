@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 695811460}
   - component: {fileID: 695811459}
   - component: {fileID: 695811458}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +543,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -636,7 +636,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpForce: 10
+  jumpCount: 0
   fireRotation: {fileID: 1771108324}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  jumpBufferTime: 0.1
+  coyoteTime: 0.1
 --- !u!114 &885115049
 MonoBehaviour:
   m_ObjectHideFlags: 0
