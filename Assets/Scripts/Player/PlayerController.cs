@@ -38,35 +38,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        IsGround();
+        CheckGround();
         Move();
-        HandleJumpInput();
-        HandleJumpBuffering();
+        JumpInput();
+        JumpAction();
     }
 
-    private void Jump()
+    private void CheckGround()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (jumpCount >= 2) return;
-            jumpCount++;
-            playerRigidbody.velocity = Vector3.zero;
-            playerRigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        }
-    }
-
-
-    private void IsGround()
-    {
-        float rayLength = capsuleCollider.bounds.extents.y + 0.05f;
+        float rayLength = capsuleCollider.bounds.extents.y + 0.05f; 
 
         hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
         Debug.DrawRay(transform.position, Vector2.down * rayLength, Color.red, 1f);
-        isGround = hit.collider != null;
+        isGround = hit.collider != null; 
         if (isGround && jumpCount != 1) jumpCount = 0;
     }
-
 
     private void Move()
     {
@@ -84,11 +70,12 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
         }
     }
-    private void HandleJumpInput()
+
+    private void JumpInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jumpBufferCounter = jumpBufferTime; // jump 키를 누르면 buffer 타이머 시작
+            jumpBufferCounter = jumpBufferTime; 
         }
         else
         {
@@ -96,9 +83,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleJumpBuffering()
+    private void JumpAction()
     {
-        // 점프 조건: buffer가 남아 있고, 착지猶予시간(coyote)이 남아있을 때
         if (jumpBufferCounter > 0 && (isGround || coyoteCounter > 0))
         {
             if (jumpCount >= 2) return;
@@ -136,5 +122,17 @@ public class PlayerController : MonoBehaviour
     //    if (isGround)
     //    {
     //        jumpCount = 0;
+    //    }
+    //}
+
+    //private void Jump()
+    //{
+
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        if (jumpCount >= 2) return;
+    //        jumpCount++;
+    //        playerRigidbody.velocity = Vector3.zero;
+    //        playerRigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
     //    }
     //}

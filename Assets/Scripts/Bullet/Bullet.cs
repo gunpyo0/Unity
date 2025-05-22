@@ -17,13 +17,11 @@ public class Bullet : MonoBehaviour
         isSetupDone = true;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         bulletRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isSetupDone || bulletRigidbody == null) return;
